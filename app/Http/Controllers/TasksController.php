@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Task;
 
 class TasksController extends Controller
 {
@@ -14,6 +15,7 @@ class TasksController extends Controller
     public function index()
     {
         //
+        return '<h1>Tere</h1>';
     }
 
     /**
@@ -23,7 +25,8 @@ class TasksController extends Controller
      */
     public function create()
     {
-        //
+        //kuvab taskide sisestusvormi
+        return view('tasks.create');
     }
 
     /**
@@ -34,7 +37,25 @@ class TasksController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // valideeri andmed
+        $this->validate($request,[
+            'name' => 'required|string|max:191|min:3',
+            'description' => 'required|string|max:10000|min:10',
+            'due_date' => 'required|date'
+         ]);
+        //loo uus task objekt
+        $task = new Task;
+        //salvesta vormilt saadud andmed objekti
+        $task->name = $request->name;
+        $task->description = $request->description;
+        $task->due_date = $request->due_date;
+        //salvesta objekt andmebaasi
+        $task->save();
+        //näita rõõmusõnumit
+        //Session::flash('success', 'Task created successfully')
+        //saada tagasi nimekirja
+        return redirect()->route('task.create');
+        
     }
 
     /**

@@ -11,6 +11,14 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+//Route::get('/', function () {
+//    return view('welcome');
+//});
+
+//Route::get('/', 'TasksController@index');
+
+Route::get('/', function(){
+    return redirect()->route('task.index');
 });
+
+Route::resource('task', 'TasksController');
