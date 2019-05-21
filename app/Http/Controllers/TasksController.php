@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 use App\Task;
 
 class TasksController extends Controller
@@ -52,7 +53,7 @@ class TasksController extends Controller
         //salvesta objekt andmebaasi
         $task->save();
         //näita rõõmusõnumit
-        //Session::flash('success', 'Task created successfully')
+        Session::flash('success', 'Task created successfully');
         //saada tagasi nimekirja
         return redirect()->route('task.create');
         

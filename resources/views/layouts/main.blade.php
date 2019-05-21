@@ -11,6 +11,7 @@
 </head>
 <body>
     <div class="container mt-3">
+        @include('partials._messages')
         @yield('content')
     </div>
     
